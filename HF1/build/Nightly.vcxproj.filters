@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Rychx\Google Drive\Fizika BSc\4. félév\Korszeru\mod_comp_methods_1\HF1\build\CMakeFiles\63f09866002d0d4b390c9691fbda3a30\Nightly.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Rychx\Google Drive\Fizika BSc\4. félév\Korszeru\mod_comp_methods_1\HF1\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Rychx\Google Drive\Fizika BSc\4. félév\Korszeru\mod_comp_methods_1\HF1\build\CMakeFiles\Nightly" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{67A234BE-A71D-37DF-ADD9-30E48E38A6BE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

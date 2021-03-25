@@ -1,0 +1,10 @@
+^C:\USERS\RYCHX\GOOGLE DRIVE\FIZIKA BSC\4. FÉLÉV\KORSZERU\MOD_COMP_METHODS_1\HF1\BUILD\CMAKEFILES\63F09866002D0D4B390C9691FBDA3A30\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Rychx/Google Drive/Fizika BSc/4. félév/Korszeru/mod_comp_methods_1/HF1" "-BC:/Users/Rychx/Google Drive/Fizika BSc/4. félév/Korszeru/mod_comp_methods_1/HF1/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/Rychx/Google Drive/Fizika BSc/4. félév/Korszeru/mod_comp_methods_1/HF1/build/HF1.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

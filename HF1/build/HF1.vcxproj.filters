@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Rychx\Google Drive\Fizika BSc\4. félév\Korszeru\mod_comp_methods_1\HF1\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Rychx\Google Drive\Fizika BSc\4. félév\Korszeru\mod_comp_methods_1\HF1\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{EC0E7546-2CDD-3882-9D96-FAD10FAD5E35}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
