@@ -3,41 +3,36 @@
 #include <cmatH>
 
 template<typename T>
-T f(T x)
+T f(T x,T F,T q,T a,T h0)
 {
-    T F=900;
-    T q=1.8;
-    T a=200;
-    T h0=35;
-
     return F/q*(std::cosh((q/F)*x)-std::cosh((q*a)/(2*F)))+h0;
 }
 
 template<typename T>
-T S(T x,T h=0.001)
+T S(T x,T F,T q,T a,T h0,T h=0.001)
 {
-    T f1=f(x+2*h);
-    T f2=f(x+h);
-    T f3=f(x-h);
-    T f4=f(x-2*h);
+    T f1=f(x+2*h,F,q,a,h0);
+    T f2=f(x+h,F,q,a,h0);
+    T f3=f(x-h,F,q,a,h0);
+    T f4=f(x-2*h,F,q,a,h0);
 
     return (-f1+8*f2-8*f3+f4)/(12*h);
 }
 
 template<typename T>
-T df(T x,T h=0.001)
+T df(T x,T F,T q,T a,T h0,T h=0.001)
 {
-    T S1=S(x,h/2);
-    T S2=S(x,h);
+    T S1=S(x,F,q,a,h0,h/2);
+    T S2=S(x,F,q,a,h0,h);
 
     return (16*S1-S2)/15;
 
 }
 
 template<typename T>
-T d_arc(T x, T h=0.001)
+T d_arc(T x,T F,T q,T a,T h0, T h=0.001)
 {
-    return std::sqrt(1+std::pow(df(x,h),2));
+    return std::sqrt(1+std::pow(df(x,F,q,a,h0,h),2));
 }
 
 template<typename F, typename T>
@@ -51,7 +46,7 @@ T integrate_M(F fun,T A,T B,int n, T h=0.001)
 
     for(i=0;i<n;i++)
     {
-        integral+=fun(m_i,h)*dx;
+        integral+=fun(m_i)*dx;
         m_i+=dx;
     }
 
@@ -63,7 +58,7 @@ T integrate_T(F fun,T A,T B,int n, T h=0.001)
 {
     
     T dx=(B-A)/n;
-    T integral=fun(A,h)*dx/2;
+    T integral=fun(A)*dx/2;
 
     int i;
     T x_i=A;
@@ -71,7 +66,7 @@ T integrate_T(F fun,T A,T B,int n, T h=0.001)
     for(i=1;i<n;i++)
     {
         x_i+=dx;
-        integral+=fun(x_i,h)*dx;
+        integral+=fun(x_i)*dx;
     }
 
     return integral;
@@ -87,16 +82,19 @@ T integrate_S(F fun,T A,T B,int n, T h=0.001)
 
 int main(int, char**) 
 {
-    int n=1000;
-
+    double F=900;
+    double q=1.8;
     double a=200;
+    double h0=35;
+    double h=0.001;
 
     double A=-a/2;
     double B=a/2;
+    int n=1000;
 
-    double arc_M=integrate_M(d_arc<double>,A,B,n);
-    double arc_T=integrate_T(d_arc<double>,A,B,n);
-    double arc_S=integrate_S(d_arc<double>,A,B,n);
+    double arc_M=integrate_M([F,q,a,h0,h](double x){return d_arc<double>(x,F,q,a,h0,h);},A,B,n);
+    double arc_T=integrate_T([F,q,a,h0,h](double x){return d_arc<double>(x,F,q,a,h0,h);},A,B,n);
+    double arc_S=integrate_S([F,q,a,h0,h](double x){return d_arc<double>(x,F,q,a,h0,h);},A,B,n);
 
     std::ofstream file;
     file.open("ivhossz.txt");
