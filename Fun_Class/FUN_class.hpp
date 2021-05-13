@@ -190,7 +190,6 @@ class FUN
     std::vector<int> local_imins(void)
     {
         FUN<T> df=this->diff();
-        FUN<T> ddf=df.diff();
         std::vector<int> Vi0=df.where_i(0);
         int n=static_cast<int>(Vi0.size());
         std::vector<int> Vi;
@@ -199,7 +198,10 @@ class FUN
         for(i=0;i<n;i++)
         {
             int k=Vi0[i]+2;
-            if(ddf.y[k+2]>0){Vi.push_back(k);}
+            T& y0=y[k-1];
+            T& y1=y[k];
+            T& y2=y[k+1];
+            if((y1<y0)&&(y1<y2)){Vi.push_back(k);}
         }
     return Vi;
     }
@@ -207,7 +209,6 @@ class FUN
     std::vector<int> local_imaxs(void)
     {
         FUN<T> df=this->diff();
-        FUN<T> ddf=df.diff();
         std::vector<int> Vi0=df.where_i(0);
         int n=static_cast<int>(Vi0.size());
         std::vector<int> Vi;
@@ -216,7 +217,10 @@ class FUN
         for(i=0;i<n;i++)
         {
             int k=Vi0[i]+2;
-            if(ddf.y[k+2]<0){Vi.push_back(k);}
+            T& y0=y[k-1];
+            T& y1=y[k];
+            T& y2=y[k+1];
+            if((y1>y0)&&(y1>y2)){Vi.push_back(k);}
         }
     return Vi;
     }
