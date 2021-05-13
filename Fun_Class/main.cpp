@@ -3,7 +3,7 @@
 int main(int, char**) 
 {
     int i;
-    int n=100000;
+    int n=100001;
     double x0=0.0;
     double x1=100;
 
@@ -27,7 +27,7 @@ int main(int, char**)
     std::string F_name="f_integral.dat";
     int C=-1;
     FUN<double> F=f_sin.integral(C);
-    std::cout<<"\nPrimitive function created with C="<<C<<"! Writing to file "<<F_name<<"...\n";
+    std::cout<<"\nPrimitive function created using Simpson 1/3 with C="<<C<<"! Writing to file "<<F_name<<"...\n";
     F.to_FILE(F_name);
     std::cout<<"Writing complete!\nPrinting first "<<N<<" lines\n";
     F.print(N);
@@ -37,11 +37,10 @@ int main(int, char**)
     double b=3*pi/2;
 
     double Y=f_sin.integrate(a,b);
-    double Y38=f_sin.integrate38(a,b);
     double y_1=f_sin.value(a);
     double y_2=f_sin.interpolate(b);
 
-    std::cout<<"\nDefinite integral from a="<<a<<" to b="<<b<<" using Simpson 1/3:\n"<<Y<<"\nThe same using Simpson 3/8:\n"<<Y38<<"\n\nFunction value at x="<<a<<":\n"<<y_1<<"\nFunction value at x="<<b<<":\n"<<y_2<<"\n\n";
+    std::cout<<"\nDefinite integral from a="<<a<<" to b="<<b<<" using Simpson 1/3:\n"<<Y<<"\n\nFunction value at x="<<a<<":\n"<<y_1<<"\nFunction value at x="<<b<<":\n"<<y_2<<"\n\n";
 
     double A=0;
     std::vector<double> VA=f_sin.where_ri(A);

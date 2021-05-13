@@ -378,18 +378,6 @@ class FUN
         return Y;
     }
 
-    T integrate38(T a,T b)
-    {
-        T h=this->h();
-        T y0=this->value(a);
-        T y1=this->value((2*a+b)/3);
-        T y2=this->value((a+2*b)/3);
-        T y3=this->value(b);
-    
-        T Y=(y0+3*y1+3*y2+y3)*3*h/8;
-        return Y;
-    }
-
 
     void to_FILE(std::string filename)
     {
@@ -468,11 +456,12 @@ FUN<T> make_FUN(T x0, T x1,F f,int n)
     std::vector<T> y;
     T h=(x1-x0)/(n-1);
 
+    T x=x0;
 
-
-    T x;
-    for(x=x0;x<=x1;x+=h)
+    int i;
+    for(i=0;i<n;i++)
     {
+        x+=h;
         y.push_back(f(x));
     }
 
