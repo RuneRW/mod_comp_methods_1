@@ -6,16 +6,6 @@ int main(int, char**)
     int n=100000;
     double x0=0.0;
     double x1=100;
-    /*std::vector<double> y;
-    double h=(x1-x0)/n;
-
-    
-    for(i=0;i<n;i++)
-    {
-        double x=x0+i*h;
-        double y_i=std::sin(x);
-        y.push_back(y_i);
-    }*/
 
 
     std::cout<<"Demonstrating the functionalities of FUN Class Objects with f(x)=sin(x) function\n\n";
