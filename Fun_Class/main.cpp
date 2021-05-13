@@ -2,23 +2,25 @@
 
 int main(int, char**) 
 {
-    std::vector<double> y;
+    int i;
     int n=100000;
     double x0=0.0;
     double x1=100;
+    /*std::vector<double> y;
     double h=(x1-x0)/n;
 
-    int i;
+    
     for(i=0;i<n;i++)
     {
         double x=x0+i*h;
         double y_i=std::sin(x);
         y.push_back(y_i);
-    }
+    }*/
 
-    std::cout<<"Demonstrating the functionalities of FUN Class Objects via the sin function\n\n";
+
+    std::cout<<"Demonstrating the functionalities of FUN Class Objects with f(x)=sin(x) function\n\n";
     std::string f_name="f.dat";
-    FUN<double> f_sin={x0,x1,y};
+    FUN<double> f_sin=make_FUN<double>(x0,x1,std::sin,n);
     std::cout<<"Function class object created! Writing to file "<<f_name<<"...\n";
     f_sin.to_FILE(f_name);
     int N=10;
@@ -50,14 +52,34 @@ int main(int, char**)
 
     std::cout<<"\nDefinite integral from a="<<a<<" to b="<<b<<":\n"<<Y<<"\n\nFunction value at x="<<a<<":\n"<<y_1<<"\nFunction value at x="<<b<<":\n"<<y_2<<"\n\n";
 
+    double A=0;
+    std::vector<double> VA=f_sin.where_ri(A);
+    int nA=static_cast<int>(VA.size());
 
-    std::vector<double> zero=f_sin.where(0);
-    int len_zero=static_cast<int>(zero.size());
-
-    std::cout<<"\nPrinting all solutions for f(x)=0:\n";
-    for(i=0;i<len_zero;i++)
+    std::cout<<"\nPrinting all solutions for f(x)="<<A<<":\n";
+    for(i=0;i<nA;i++)
     {
-        std::cout<<zero[i]<<","<<f_sin.value(zero[i])<<"\n";
+        std::cout<<VA[i]<<","<<f_sin.value(VA[i])<<"\n";
+    }
+
+    double B=0.5;
+    std::vector<double> VB=f_sin.where_ri(B);
+    int nB=static_cast<int>(VB.size());
+
+    std::cout<<"\nPrinting all solutions for f(x)="<<B<<":\n";
+    for(i=0;i<nB;i++)
+    {
+        std::cout<<VB[i]<<","<<f_sin.value(VB[i])<<"\n";
+    }
+
+    double D=-0.5;
+    std::vector<double> VD=f_sin.where_ri(D);
+    int nD=static_cast<int>(VD.size());
+
+    std::cout<<"\nPrinting all solutions for f(x)="<<D<<":\n";
+    for(i=0;i<nD;i++)
+    {
+        std::cout<<VD[i]<<","<<f_sin.value(VD[i])<<"\n";
     }
 
     std::cout<<"\n\n";

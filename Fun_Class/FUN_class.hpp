@@ -22,7 +22,7 @@ class FUN
     T h(void)
     {
         int n=this->size();
-        return (x1-x0)/(n);
+        return (x1-x0)/(n-1);
     }
 
 
@@ -31,20 +31,20 @@ class FUN
         T h=this->h();
 
         int i=1;
-        T x2=x0+h;
+        T x_1=x0+h;
 
-        while(x2<x)
+        while(x_1<x)
         {
-            x2+=h; 
+            x_1+=h; 
             i++;
         }
 
-        T x1=x2-h;
+        T x_0=x_1-h;
 
-        T& y1=y[i-1];
-        T& y2=y[i];
+        T& y_0=y[i-1];
+        T& y_1=y[i];
 
-        T Y=y1+(x-x1)*(y2-y1)/(x2-x1);
+        T Y=y_0+(x-x_0)*(y_1-y_0)/(x_1-x_0);
 
 
         return Y;
@@ -155,6 +155,33 @@ class FUN
     
         T h=this->h();
         std::vector<T> Vx=itox(Vi,x0,h);
+
+        return Vx;
+    }
+
+    std::vector<T> where_ri(T yi)
+    {
+        T h=this->h();
+        int n=this->size();
+
+        std::vector<T> Vx;
+
+        int i;
+        for(i=1;i<n;i++)
+        {
+            T& y_0=y[i-1];
+            T& y_1=y[i];
+
+            if(((y_0<yi)&&(y_1>=yi))||(y_1<=yi)&&(y_0>yi))
+            {
+                T x_0=this->xi(i-1);
+                T x_1=this->xi(i);
+
+                T xi=x_0+(yi-y_0)*(x_1-x_0)/(y_1-y_0);
+
+                Vx.push_back(xi);
+            }
+        }
 
         return Vx;
     }
@@ -421,4 +448,22 @@ bool equals(T y1, T y2, T lower,T upper)
     if(((y1+upper)>=y2)&&((y1-lower)<=y2)){return true;}   
     
     return false;
+}
+
+template<typename T, typename F>
+FUN<T> make_FUN(T x0, T x1,F f,int n)
+{
+    std::vector<T> y;
+    T h=(x1-x0)/(n-1);
+
+
+
+    T x;
+    for(x=x0;x<=x1;x+=h)
+    {
+        y.push_back(f(x));
+    }
+
+    FUN<T> fun={x0,x1,y};
+    return fun;
 }
