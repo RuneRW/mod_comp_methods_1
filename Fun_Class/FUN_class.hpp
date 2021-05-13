@@ -378,6 +378,18 @@ class FUN
         return Y;
     }
 
+    T integrate38(T a,T b)
+    {
+        T h=this->h();
+        T y0=this->value(a);
+        T y1=this->value((2*a+b)/3);
+        T y2=this->value((a+2*b)/3);
+        T y3=this->value(b);
+    
+        T Y=(y0+3*y1+3*y2+y3)*3*h/8;
+        return Y;
+    }
+
 
     void to_FILE(std::string filename)
     {

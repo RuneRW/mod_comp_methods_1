@@ -20,7 +20,7 @@ int main(int, char**)
 
     std::cout<<"Demonstrating the functionalities of FUN Class Objects with f(x)=sin(x) function\n\n";
     std::string f_name="f.dat";
-    FUN<double> f_sin=make_FUN<double>(x0,x1,std::sin,n);
+    FUN<double> f_sin=make_FUN<double>(x0,x1,[](double x){return std::sin(x);},n);
     std::cout<<"Function class object created! Writing to file "<<f_name<<"...\n";
     f_sin.to_FILE(f_name);
     int N=10;
@@ -47,10 +47,11 @@ int main(int, char**)
     double b=3*pi/2;
 
     double Y=f_sin.integrate(a,b);
+    double Y38=f_sin.integrate38(a,b);
     double y_1=f_sin.value(a);
     double y_2=f_sin.interpolate(b);
 
-    std::cout<<"\nDefinite integral from a="<<a<<" to b="<<b<<":\n"<<Y<<"\n\nFunction value at x="<<a<<":\n"<<y_1<<"\nFunction value at x="<<b<<":\n"<<y_2<<"\n\n";
+    std::cout<<"\nDefinite integral from a="<<a<<" to b="<<b<<" using Simpson 1/3:\n"<<Y<<"\nThe same using Simpson 3/8:\n"<<Y38<<"\n\nFunction value at x="<<a<<":\n"<<y_1<<"\nFunction value at x="<<b<<":\n"<<y_2<<"\n\n";
 
     double A=0;
     std::vector<double> VA=f_sin.where_ri(A);
